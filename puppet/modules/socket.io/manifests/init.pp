@@ -20,11 +20,9 @@ node 'socketio.schkovich.local' {
   class {'nodejs':
     stage => first,
   }
-  ->
-  exec { "set_capability":
-    # Open ports bellow 1024
-    command => "/sbin/setcap cap_net_bind_service=+ep /usr/bin/nodejs",
-    provider => shell,
+
+  class  {'schkovich::nodejs':
+    stage => last,
   }
 
 }
