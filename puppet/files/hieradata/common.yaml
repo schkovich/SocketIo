@@ -1,0 +1,14 @@
+ssh::access::allow:
+  - &UBUNTU 'ubuntu'
+  - '@sysadmins'
+ssh::access::deny:
+  - 'root'
+
+ssh::keys::ubuntu:
+  type: 'ssh-rsa'
+  public_key: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDCd7sEZsB8wVr+MhHD7tI3StA3B6GRAxl5/2ScQhAS/rvH0TS1zdUSXGc2f0adrELe0TvCnddnotsSS1XOc8psNAymu/+vKfW/gRIwSTyO4znqdTNdhfvfbB1fumNbgBriTH8ajU1Cz9Cx5x9MndwgzZemP2bibrggCo8jtiYL/oMaraE2LN4YlDrYWp3xARE07I6QLM3kGC9Eylxya/tywgqaaQZsJ6zkuYrN4meq2wOxg0CIqrTOeQ0iVP9RQXHgAsp40EimJFali1ITgTb0eCAe5blTcxXQVoGTlFIjBwffW/rurJgN20UO5fW5YzLy2HKhIvhUllTc4FtIhXFf'
+
+ssh::users:
+  ubuntu:
+    allow: [*UBUNTU]
+
