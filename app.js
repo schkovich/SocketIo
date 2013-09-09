@@ -10,28 +10,29 @@
         user = require('./routes/user'),
         http = require('http'),
         path = require('path'),
-        app = express();
+        webServer = express();
 
-    app.configure(function () {
-        app.set('port', process.env.PORT || 80);
-        app.set('views', __dirname + '/views');
-        app.set('view engine', 'jade');
-        app.use(express.favicon());
-        app.use(express.logger('dev'));
-        app.use(express.bodyParser());
-        app.use(express.methodOverride());
-        app.use(app.router);
-        app.use(express.static(path.join(__dirname, 'public')));
+    webServer.configure(function () {
+        webServer.set('port', process.env.PORT || 80);
+        webServer.set('views', __dirname + '/views');
+        webServer.set('view engine', 'jade');
+        webServer.use(express.favicon());
+        webServer.use(express.logger('dev'));
+        webServer.use(express.bodyParser());
+        webServer.use(express.methodOverride());
+        webServer.use(webServer.router);
+        webServer.use(express.static(path.join(__dirname, 'public')));
     });
 
-    app.configure('development', function () {
-        app.use(express.errorHandler());
+    webServer.configure('development', function () {
+        webServer.use(express.errorHandler());
     });
 
-    app.get('/', routes.index);
-    app.get('/users', user.list);
+    webServer.get('/', routes.index);
+    webServer.get('/users', user.list);
 
-    http.createServer(app).listen(app.get('port'), function () {
-        console.log("Express server listening on port " + app.get('port'));
+    http.createServer(webServer).listen(webServer.get('port'), function () {
+        console.log("Express server listening on port "
+            + webServer.get('port'));
     });
 }());
